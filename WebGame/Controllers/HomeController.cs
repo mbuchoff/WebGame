@@ -24,9 +24,9 @@ namespace WebGame.Controllers
         {
             if (Session.GetString("GUID") == null)
             {
-                Session.SetString("GUID", (new Guid()).ToString());
+                Session.SetString("GUID", Guid.NewGuid().ToString());
             }
-            return View();
+            return View(new IndexModel() { externalId = Session.GetString("GUID") });
         }
 
         public IActionResult Privacy()
