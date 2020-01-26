@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebGame.Models;
@@ -12,6 +13,7 @@ namespace WebGame.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ISession Session => this.HttpContext.Session;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,6 +22,10 @@ namespace WebGame.Controllers
 
         public IActionResult Index()
         {
+            if (Session.GetString("GUID") == null)
+            {
+                Session.SetString("GUID", (new Guid()).ToString());
+            }
             return View();
         }
 
