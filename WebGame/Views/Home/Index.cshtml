@@ -4,7 +4,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script src="~/lib/qrcode-generator/qrcode.min.js"></script>
 <div class="text-center">
     <h1 class="display-4">Go Away - @Model.externalId</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div id="qr"></div>
 </div>
+<script>
+    var qr = qrcode("0", "M");
+    qr.addData("http://www.geekologie.com");
+    qr.make();
+
+    document.getElementById('qr').innerHTML = qr.createSvgTag(20);
+</script>
