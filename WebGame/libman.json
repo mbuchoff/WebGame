@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "qrcode-generator@1.4.4",
+      "destination": "wwwroot/lib/qrcode-generator/"
+    }
+  ]
+}
