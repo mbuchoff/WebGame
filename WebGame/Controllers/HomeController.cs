@@ -29,11 +29,11 @@ namespace WebGame.Controllers
                 Session.SetString("GUID", Guid.NewGuid().ToString());
             }
 
+            var request = this.Url.ActionContext.HttpContext.Request;
             return View(new IndexModel()
             {
-                externalId = Session.GetString("GUID"),
-                thing1 = IPGlobalProperties.GetIPGlobalProperties().DomainName,
-                thing2 = Dns.GetHostName()
+                ExternalId = Session.GetString("GUID"),
+                Thing1 = request.Scheme + "://" + request.Host,
             });
         }
 

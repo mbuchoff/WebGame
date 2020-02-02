@@ -6,13 +6,12 @@
 
 <script src="~/lib/qrcode-generator/qrcode.min.js"></script>
 <div class="text-center">
-    <h1 class="display-4">Room ID is @Model.externalId</h1>
+    <h1 class="display-4">Room ID is @Model.ExternalId</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <div id="qr"></div>
 </div>
 <script>
-    alert("@Model.thing1");
-    alert("@Model.thing2");
+    alert("@Model.Thing1");
     var qr = qrcode("0", "M");
     qr.addData("http://www.geekologie.com");
     qr.make();
