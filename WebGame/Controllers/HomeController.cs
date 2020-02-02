@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using WebGame.Models;
 
 namespace WebGame.Controllers
@@ -15,24 +17,50 @@ namespace WebGame.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ISession Session => this.HttpContext.Session;
+        private readonly Random random;
+        private readonly GameModel game;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Random random, GameModel game)
         {
             _logger = logger;
+            this.random = random;
+            this.game = game;
         }
 
-        public IActionResult Index()
+        public IActionResult Room()
         {
-            if (Session.GetString("GUID") == null)
+            var roomId = random.Next(0, int.MaxValue);
+            this.game.Rooms.Add(new RoomModel()
             {
-                Session.SetString("GUID", Guid.NewGuid().ToString());
-            }
+                Id = roomId,
+            });
 
-            return View(new IndexModel()
+            return View(new RoomViewModel()
             {
-                ExternalId = Session.GetString("GUID"),
-                QrUrl = Request.Scheme + "://" + Request.Host + Request.Path,
+                QrUrl = new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(Player)}?roomId={roomId}"),
+                RoomInfoUrl = new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(LivePlayerInfo)}?roomId={roomId}"),
+            });
+        }
+
+        public string LivePlayerInfo(int roomId)
+        {
+            return JsonConvert.SerializeObject(
+                game.Rooms.First(r => r.Id == roomId),
+                Formatting.Indented);
+        }
+
+        public IActionResult Player(int roomId)
+        {
+            var player = new PlayerModel()
+            {
+                Id = random.Next(0, int.MaxValue),
+            };
+            game.Rooms.First(r => r.Id == roomId).Players.Add(player);
+
+            return View(new PlayerViewModel()
+            {
+                Player = player,
+                RoomId = roomId,
             });
         }
 
