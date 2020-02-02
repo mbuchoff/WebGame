@@ -9,6 +9,6 @@ namespace WebGame.Models
     public class IndexModel : PageModel
     {
         public string ExternalId { get; set; }
-        public string Thing1 { get; set; }
+        public string QrUrl { get; set; }
     }
 }
