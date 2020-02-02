@@ -11,6 +11,8 @@
     <div id="qr"></div>
 </div>
 <script>
+    alert("@Model.thing1");
+    alert("@Model.thing2");
     var qr = qrcode("0", "M");
     qr.addData("http://www.geekologie.com");
     qr.make();

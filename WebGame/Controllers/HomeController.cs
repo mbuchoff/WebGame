@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +28,13 @@ namespace WebGame.Controllers
             {
                 Session.SetString("GUID", Guid.NewGuid().ToString());
             }
-            return View(new IndexModel() { externalId = Session.GetString("GUID") });
+
+            return View(new IndexModel()
+            {
+                externalId = Session.GetString("GUID"),
+                thing1 = IPGlobalProperties.GetIPGlobalProperties().DomainName,
+                thing2 = Dns.GetHostName()
+            });
         }
 
         public IActionResult Privacy()
