@@ -6,4 +6,17 @@
 
 <div class="text-center">
     <span>You are player @Model.Player.Id in room @Model.RoomId</span>
+    <br/>
+    <span id="roomInfo"></span>
 </div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            let roomInfo = $('#roomInfo');
+            repeatedlyCheck("@Model.RoomInfoUrl", 2000, function (data) {
+                roomInfo.text(data);
+            })
+        });
+    </script>
+}

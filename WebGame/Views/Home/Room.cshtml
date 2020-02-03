@@ -5,25 +5,27 @@
 }
 
 <script src="~/lib/qrcode-generator/qrcode.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
 <div class="text-center">
     <div id="qr"></div>
     <a href="@Model.QrUrl">@Model.QrUrl</a>
     <br />
     <span id="roomInfo">Text goes here</span>
 </div>
-<script>
-    var qr = qrcode("0", "M");
-    qr.addData("@Model.QrUrl");
-    qr.make();
 
-    document.getElementById('qr').innerHTML = qr.createSvgTag(10);
+@section Scripts {
+    <script>
+        var qr = qrcode("0", "M");
+        qr.addData("@Model.QrUrl");
+        qr.make();
 
-    setInterval(function () {
-        $.get("@Model.RoomInfoUrl")
-            .done(function (data) {
-                let roomInfo = $('#roomInfo');
+        document.getElementById('qr').innerHTML = qr.createSvgTag(10);
+
+        $(function () {
+            let roomInfo = $('#roomInfo');
+
+            repeatedlyCheck("@Model.RoomInfoUrl", 2000, function (data) {
                 roomInfo.text(data);
             })
-    }, 2000);
-</script>
+        });
+    </script>
+}

@@ -38,8 +38,13 @@ namespace WebGame.Controllers
             return View(new RoomViewModel()
             {
                 QrUrl = new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(Player)}?roomId={roomId}"),
-                RoomInfoUrl = new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(LivePlayerInfo)}?roomId={roomId}"),
+                RoomInfoUrl = RoomInfoUrl(roomId),
             });
+        }
+
+        private Uri RoomInfoUrl(int roomId)
+        {
+            return new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(LivePlayerInfo)}?roomId={roomId}");
         }
 
         public string LivePlayerInfo(int roomId)
@@ -61,6 +66,7 @@ namespace WebGame.Controllers
             {
                 Player = player,
                 RoomId = roomId,
+                RoomInfoUrl = RoomInfoUrl(roomId),
             });
         }
 
