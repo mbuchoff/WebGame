@@ -8,6 +8,11 @@
     <span>You are player @Model.Player.Id in room @Model.RoomId</span>
     <br/>
     <span id="roomInfo"></span>
+    <br />
+    @if (Model.First)
+    {
+        <button>START</button>
+    }
 </div>
 
 @section Scripts {

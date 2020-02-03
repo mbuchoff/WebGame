@@ -60,13 +60,15 @@ namespace WebGame.Controllers
             {
                 Id = random.Next(0, int.MaxValue),
             };
-            game.Rooms.First(r => r.Id == roomId).Players.Add(player);
+            var room = game.Rooms.First(r => r.Id == roomId);
+            room.Players.Add(player);
 
             return View(new PlayerViewModel()
             {
                 Player = player,
                 RoomId = roomId,
                 RoomInfoUrl = RoomInfoUrl(roomId),
+                First = room.Players.Count == 1,
             });
         }
 
