@@ -11,7 +11,7 @@
     <br />
     @if (Model.First)
     {
-        <button>START</button>
+        <input type="button" value="BeginGame" onclick="location.href='@Url.Action("BeginGame", "Home", new { roomId = Model.RoomId } )'" />
     }
 </div>
 
@@ -19,8 +19,12 @@
     <script>
         $(function () {
             let roomInfo = $('#roomInfo');
-            repeatedlyCheck("@Model.RoomInfoUrl", 2000, function (data) {
+            repeatedlyCheck("@Model.PregameUrl", 2000, function (data) {
                 roomInfo.text(data);
+                let jsonData = JSON.parse(data);
+                if (jsonData.GameStarted) {
+                    location.href = '@Url.Action("BeginGame", "Home", new { roomId = Model.RoomId } )';
+                }
             })
         });
     </script>

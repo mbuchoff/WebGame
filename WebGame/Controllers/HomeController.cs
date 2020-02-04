@@ -37,17 +37,18 @@ namespace WebGame.Controllers
 
             return View(new RoomViewModel()
             {
+                RoomId = roomId,
                 QrUrl = new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(Player)}?roomId={roomId}"),
-                RoomInfoUrl = RoomInfoUrl(roomId),
+                PregameUrl = PregameUrl(roomId),
             });
         }
 
-        private Uri RoomInfoUrl(int roomId)
+        private Uri PregameUrl(int roomId)
         {
-            return new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(LivePlayerInfo)}?roomId={roomId}");
+            return new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(PreGameInfo)}?roomId={roomId}");
         }
 
-        public string LivePlayerInfo(int roomId)
+        public string PreGameInfo(int roomId)
         {
             return JsonConvert.SerializeObject(
                 game.Rooms.First(r => r.Id == roomId),
@@ -67,12 +68,23 @@ namespace WebGame.Controllers
             {
                 Player = player,
                 RoomId = roomId,
-                RoomInfoUrl = RoomInfoUrl(roomId),
+                PregameUrl = PregameUrl(roomId),
                 First = room.Players.Count == 1,
             });
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult BeginGame(int roomId)
+        {
+            game.Rooms.First(r => r.Id == roomId).GameStarted = true;
+            return View("GameStarted");
+        }
+
+        public IActionResult GameStarted()
         {
             return View();
         }

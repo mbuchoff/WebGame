@@ -9,7 +9,7 @@ namespace WebGame.Models
     {
         public PlayerModel Player { get; set; }
         public int RoomId { get; set; }
-        public Uri RoomInfoUrl { get; set; }
+        public Uri PregameUrl { get; set; }
         public bool First { get; internal set; }
     }
 }
