@@ -3,5 +3,6 @@
 
 // Write your JavaScript code.
 function repeatedlyCheck(url, intervalMillis, f) {
+    { $.get(url).done(f) }
     setInterval(function () { $.get(url).done(f) }, intervalMillis);
 }

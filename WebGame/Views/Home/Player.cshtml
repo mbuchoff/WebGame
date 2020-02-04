@@ -23,7 +23,7 @@
                 roomInfo.text(data);
                 let jsonData = JSON.parse(data);
                 if (jsonData.GameStarted) {
-                    location.href = '@Url.Action("BeginGame", "Home", new { roomId = Model.RoomId } )';
+                    location.href = '@Url.Action("GameStarted", "Home" )';
                 }
             })
         });

@@ -45,10 +45,10 @@ namespace WebGame.Controllers
 
         private Uri PregameUrl(int roomId)
         {
-            return new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(PreGameInfo)}?roomId={roomId}");
+            return new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(PregameInfo)}?roomId={roomId}");
         }
 
-        public string PreGameInfo(int roomId)
+        public string PregameInfo(int roomId)
         {
             return JsonConvert.SerializeObject(
                 game.Rooms.First(r => r.Id == roomId),
