@@ -5,27 +5,22 @@
 }
 
 <div class="text-center">
-    <span>You are player @Model.Player.Id in room @Model.RoomId</span>
-    <br/>
+    <div id="enterYourName">
+        <span>What is your name?</span>
+        <input id="playerName" />
+        <button id="submitPlayerName">Submit</button>
+    </div>
+    <br />
     <span id="roomInfo"></span>
     <br />
-    @if (Model.First)
-    {
-        <input type="button" value="BeginGame" onclick="location.href='@Url.Action("BeginGame", "Home", new { roomId = Model.RoomId } )'" />
-    }
+    <input id="beginGameButton" style="display: none" type="button" value="BeginGame" onclick="location.href='@Url.Action("BeginGame", "Home" , new { roomId=Model.RoomId } )'" />
 </div>
 
 @section Scripts {
     <script>
-        $(function () {
-            let roomInfo = $('#roomInfo');
-            repeatedlyCheck("@Model.PregameUrl", 2000, function (data) {
-                roomInfo.text(data);
-                let jsonData = JSON.parse(data);
-                if (jsonData.GameStarted) {
-                    location.href = '@Url.Action("GameStarted", "Home" )';
-                }
-            })
-        });
+        var roomId = @Model.RoomId;
+        var pregameUrl = '@Model.PregameUrl';
+        var gameStartedUrl = '@Url.Action("GameStarted", "Home" )';
     </script>
+    <script src="~/js/PlayerView.js"></script>
 }

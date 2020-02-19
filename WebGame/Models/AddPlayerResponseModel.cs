@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace WebGame.Models
 {
-    public class PlayerViewModel
+    public class AddPlayerResponseModel
     {
-        public int RoomId { get; set; }
-        public Uri PregameUrl { get; set; }
+        public int PlayerId { get; set; }
+        public bool IsFirst { get; set; }
     }
 }

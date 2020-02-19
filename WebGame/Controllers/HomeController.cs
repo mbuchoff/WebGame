@@ -55,21 +55,29 @@ namespace WebGame.Controllers
                 Formatting.Indented);
         }
 
-        public IActionResult Player(int roomId)
+        public AddPlayerResponseModel AddPlayer(int roomId, string playerName)
         {
+            var r = this.game.Rooms.Where(r => r.Id == roomId).First();
+            bool isFirst = (r.Players.Count == 0);
             var player = new PlayerModel()
             {
                 Id = random.Next(0, int.MaxValue),
+                Name = playerName
             };
-            var room = game.Rooms.First(r => r.Id == roomId);
-            room.Players.Add(player);
+            r.Players.Add(player);
+            return new AddPlayerResponseModel
+            {
+                PlayerId = player.Id,
+                IsFirst = isFirst
+            };
+        }
 
+        public IActionResult Player(int roomId)
+        {
             return View(new PlayerViewModel()
             {
-                Player = player,
                 RoomId = roomId,
                 PregameUrl = PregameUrl(roomId),
-                First = room.Players.Count == 1,
             });
         }
 
