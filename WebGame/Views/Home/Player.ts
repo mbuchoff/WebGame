@@ -1,13 +1,19 @@
-﻿$(document).ready(function () {
-    let roomInfo = $('#roomInfo');
+﻿declare const pregameUrl: string
+declare const gameStartedUrl: string
+declare const roomId: number
 
-    repeatedlyCheck(pregameUrl, 2000, function (data) {
+$(document).ready(function () {
+    //let roomInfo = $('#roomInfo');
+
+    /*
+    repeatedlyCheck(pregameUrl, 2000, function (data:string) {
         roomInfo.text(data);
         let jsonData = JSON.parse(data);
         if (jsonData.GameStarted) {
             location.href = gameStartedUrl;
         }
     })
+    */
     $('#submitPlayerName').click(function () {
         $('#enterYourName').hide();
         $.ajax({

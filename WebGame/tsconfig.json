@@ -1,0 +1,12 @@
+﻿{
+    "compilerOptions": {
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noErrorTruncation": true,
+        "noEmitOnError": true,
+        "noImplicitReturns": true,
+        "sourceMap": true,
+        "noUnusedLocals": true,
+        "outDir": "wwwroot/js/Generated"
+    }
+}
