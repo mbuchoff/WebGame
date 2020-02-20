@@ -5,6 +5,15 @@
     {
       "library": "qrcode-generator@1.4.4",
       "destination": "wwwroot/lib/qrcode-generator/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap@4.4.1",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery/"
     }
   ]
 }

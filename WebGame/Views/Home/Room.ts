@@ -16,11 +16,11 @@ $('#qr').html(qr.createSvgTag(10));
 $(function () {
     let roomInfo = $('#roomInfo');
 
-    repeatedlyCheck("@Model.PregameUrl", 2000, function (data) {
+    repeatedlyCheck(pregameUrl, 2000, function (data) {
         roomInfo.text(data);
         let jsonData = JSON.parse(data);
         if (jsonData.GameStarted) {
-            location.href = '@Url.Action("GameStarted", "Home" )';
+            location.href = gameStartedUrl;
         }
     })
 });
