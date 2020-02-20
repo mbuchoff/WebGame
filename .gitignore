@@ -1,3 +1,7 @@
 ﻿/.vs
 /WebGame/bin
+/WebGame/obj
+/WebGame/wwwroot/js/Generated
+/WebGame/wwwroot/lib
+/node_modules
 *.cshtml.g.cs
