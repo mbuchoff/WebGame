@@ -2,11 +2,11 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "_CellPhoneLayout";
 }
 
 <div class="text-center">
     <div id="qr"></div>
-    <a href="@Model.QrUrl">@Model.QrUrl</a>
     <br />
     <span id="roomInfo">Text goes here</span>
 </div>

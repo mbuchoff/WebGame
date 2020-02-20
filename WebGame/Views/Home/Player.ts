@@ -2,10 +2,10 @@
 declare const gameStartedUrl: string
 declare const roomId: number
 
-$(document).ready(function () {
+$(document).ready(() => {
     let roomInfo = $('#roomInfo');
 
-    repeatedlyCheck(pregameUrl, 2000, function (data:string) {
+    repeatedlyCheck(pregameUrl, 2000, data => {
         roomInfo.text(data);
         let jsonData = JSON.parse(data);
         if (jsonData.GameStarted) {
@@ -13,7 +13,7 @@ $(document).ready(function () {
         }
     })
 
-    $('#submitPlayerName').click(function () {
+    $('#submitPlayerName').click(() => {
         $('#enterYourName').hide();
         $.ajax({
             method: "POST",
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 roomId: roomId,
                 playerName: $('#playerName').val()
             }
-        }).done(function (response) {
+        }).done(response => {
             if (response.isFirst) {
                 $('#beginGameButton').show();
             }

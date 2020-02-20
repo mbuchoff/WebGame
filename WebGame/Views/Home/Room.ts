@@ -4,23 +4,28 @@ declare const qrcode: (typeNumber:string, errorCorrectionLevel:string) => QrObje
 interface QrObject {
     addData: (data: string, mode?: string) => void;
     make: () => void;
-    createSvgTag: (cellSize: number, margin?: number, alt?: string, title?: string) => string;
+    createSvgTag: (options: Object) => string;
 }
 
-var qr = qrcode("0", "M");
-qr.addData(qrUrl);
-qr.make();
+$(document).ready(() => {
+    var qr = qrcode("0", "M");
+    qr.addData(qrUrl);
+    qr.make();
 
-$('#qr').html(qr.createSvgTag(10));
+    $('#qr').html(qr.createSvgTag({
+        cellSize: 10,
+        scalable: true
+    }));
 
-$(function () {
-    let roomInfo = $('#roomInfo');
+    $(() => {
+        let roomInfo = $('#roomInfo');
 
-    repeatedlyCheck(pregameUrl, 2000, function (data) {
-        roomInfo.text(data);
-        let jsonData = JSON.parse(data);
-        if (jsonData.GameStarted) {
-            location.href = gameStartedUrl;
-        }
-    })
+        repeatedlyCheck(pregameUrl, 2000, (data) => {
+            roomInfo.text(data);
+            let jsonData = JSON.parse(data);
+            if (jsonData.GameStarted) {
+                location.href = gameStartedUrl;
+            }
+        })
+    });
 });
