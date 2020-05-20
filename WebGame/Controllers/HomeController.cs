@@ -38,7 +38,7 @@ namespace WebGame.Controllers
             return View(new RoomViewModel()
             {
                 RoomId = roomId,
-                QrUrl = new Uri(Request.Scheme + "://" + Request.Host + $"/Home/{nameof(Player)}?roomId={roomId}"),
+                QrSuffix = $"Home/{nameof(Player)}?roomId={roomId}",
                 PregameUrl = PregameUrl(roomId),
             });
         }

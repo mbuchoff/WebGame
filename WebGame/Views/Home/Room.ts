@@ -1,13 +1,16 @@
-﻿declare const qrUrl: string;
-declare const qrcode: (typeNumber:string, errorCorrectionLevel:string) => QrObject
-
+﻿declare const qrcode: (typeNumber:string, errorCorrectionLevel:string) => QrObject
 interface QrObject {
     addData: (data: string, mode?: string) => void;
     make: () => void;
     createSvgTag: (options: Object) => string;
 }
 
-$(document).ready(() => {
+function room(qrSuffix: string) {
+    let currentUrl = window.location.href;
+    let lastChar = currentUrl.charAt(currentUrl.length - 1);
+    if (lastChar != '/') currentUrl += '/';
+
+    var qrUrl = `${currentUrl}${qrSuffix}`;
     var qr = qrcode("0", "M");
     qr.addData(qrUrl);
     qr.make();
@@ -28,4 +31,4 @@ $(document).ready(() => {
             }
         })
     });
-});
+}

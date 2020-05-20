@@ -13,9 +13,11 @@
 
 @section Scripts {
     <script>
-        const qrUrl = '@Model.QrUrl';
         const pregameUrl = '@Model.PregameUrl';
         const gameStartedUrl = '@Url.Action("GameStarted", "Home" )';
+        $(document).ready(() => {
+            room('@Model.QrSuffix');
+        });
     </script>
     <script src="~/lib/qrcode-generator/qrcode.min.js"></script>
     <script src="~/js/Generated/Home/Room.js"></script>

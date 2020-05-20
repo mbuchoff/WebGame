@@ -9,7 +9,7 @@ namespace WebGame.Models
     public class RoomViewModel : PageModel
     {
         public int RoomId { get; set; }
-        public System.Uri QrUrl { get; set; }
+        public string QrSuffix { get; set; }
         public System.Uri PregameUrl { get; set; }
     }
 }

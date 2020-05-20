@@ -1,4 +1,4 @@
-    using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +25,12 @@ namespace WebGame
         public static void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddCors(o => o.AddPolicy("MyPolicy", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                }))
                 .AddSingleton(new Random())
                 .AddSingleton(new GameModel())
                 .AddControllersWithViews();
@@ -46,7 +52,7 @@ namespace WebGame
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseCors("MyPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
